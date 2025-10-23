@@ -6,6 +6,7 @@ public class ATMsimple{
 	private static int[] pin ={111,222,333};
 	private static double[] saldo ={1000000,2000000,3000000};
 	private static int userid;
+	private static int sandi;
 
 	public static int autentikasiuser(String nama){
 		for (int i = 0; i < user.length; i++) {
@@ -27,7 +28,7 @@ public class ATMsimple{
 		if (userid != -1) {
 			System.out.println("--------------------------------");
 			System.out.println("Masukan Sandi");
-			int sandi = input.nextInt();
+			sandi = input.nextInt();
 			if (autentikasipin(userid,sandi)) {
 				System.out.println("--------------------------------");
             	System.out.println("Selamat datang, " + user[userid]);
@@ -41,7 +42,9 @@ public class ATMsimple{
 	}
 	public static void ceksaldo(){
 		cekuser();
-		System.out.println("saldo anda adalah : " + saldo[userid]);
+		if (autentikasipin(userid,sandi)) {
+			System.out.println("saldo anda adalah : " + saldo[userid]);
+		}
 	}
 	public static void setortunai(){
 		cekuser();
