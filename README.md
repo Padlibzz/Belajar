@@ -1,23 +1,28 @@
+# Coding Learning Repository 💻
 
-# Repositori Belajar Koding 💻
+Welcome to my learning repository! This repository serves as a place for me to store, track, and manage all the **assignments, mini-projects, and coding study notes** I create on my journey to master the world of programming.
 
-Selamat datang di repositori belajar saya\! Repositori ini berfungsi sebagai tempat saya menyimpan, melacak, dan mengelola semua **tugas, proyek mini, dan catatan belajar koding** yang saya buat dalam perjalanan saya menguasai dunia pemrograman.
+The main goals of this repository are to:
 
-Tujuan utama repositori ini adalah untuk:
+* Record my learning progress in an organized manner.
+* Store solutions to coding assignments and challenges.
+* Serve as an initial portfolio of what I have learned.
 
-  * Mencatat kemajuan belajar secara terorganisir.
-  * Menyimpan solusi tugas dan tantangan koding.
-  * Menjadi portofolio awal dari apa yang telah saya pelajari.
+---
 
------
+## Project Structure (Optional - Based on Previous Suggestion)
 
-## 📝 Kontak
+*(You might want to re-add the structure table from the first response here, or keep it simple like this.)*
 
-Jika Anda memiliki saran, masukan, atau ingin berdiskusi mengenai salah satu topik di sini, jangan ragu untuk menghubungi saya\!
+---
 
-  * **GitHub:** **[@Padlibzz]**
-  * **Email:** **[padlibadzara@gmail.com]**
+## 📝 Contact
 
------
+If you have any suggestions, feedback, or would like to discuss any of the topics here, please do not hesitate to contact me!
 
-**Semangat Belajar\!** 💡# Belajar
+* **GitHub:** **[@Padlibzz]**
+* **Email:** **[padlibadzara@gmail.com]**
+
+---
+
+**Keep Learning!** 💡
