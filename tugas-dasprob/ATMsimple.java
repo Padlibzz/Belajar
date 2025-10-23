@@ -4,7 +4,7 @@ public class ATMsimple{
 	private static Scanner input = new Scanner(System.in);
 	private static String[] user ={"padli","risca","apif"};
 	private static int[] pin ={111,222,333};
-	private static double[] saldo ={1000000,2000000,3000000};
+	private static long[] saldo ={1000000,2000000,3000000};
 	private static int userid;
 	private static int sandi;
 
@@ -49,7 +49,7 @@ public class ATMsimple{
 	public static void setortunai(){
 		cekuser();
 		System.out.print("Masukan jumlah yang mau di setor : ");
-		double setor = input.nextDouble();
+		long setor = input.nextLong();
 		if (setor < 0) {
 			System.out.println("masukan nominal yang benar");
 		}else{
@@ -62,7 +62,7 @@ public class ATMsimple{
 	public static void tariktunai(){
 		cekuser();
 		System.out.print("Masukan jumlah yang mau di tarik : ");
-		double tarik = input.nextDouble();
+		long tarik = input.nextLong();
 		if (tarik < 0 || tarik > saldo[userid]) {
 			System.out.println("masukan nominal yang benar");
 		}else{
@@ -89,7 +89,7 @@ public class ATMsimple{
 		}
 		if(penerima != -1 && penerima != userid){
 			System.out.print("Jumlah yang di kirim : ");
-			double kirim = input.nextDouble();
+			long kirim = input.nextLong();
 			if (kirim < 0 || kirim > saldo[userid]) {
 				System.out.println("masukan nominal yang benar");
 			}else{
