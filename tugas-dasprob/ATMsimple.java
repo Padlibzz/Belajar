@@ -2,7 +2,7 @@ import java.util.Scanner;
 import java.util.ArrayList;
 import java.util.Arrays;
 
-public class SimpleATM {
+public class ATMsimple {
     ;
     public static Scanner input = new Scanner(System.in);
 
