@@ -1,92 +1,65 @@
-## 🧩 Penjelasan Baris per Baris: Kelas Utama (`ATMsimple`)
+# 🔬 Analisis Kode Rinci: `ATMsimple.java`
 
-Kelas ini berisi fungsi yang pertama kali dijalankan oleh Java (`main`) dan mengatur menu awal sebelum _login_.
+Analisis ini dibagi berdasarkan struktur kelas dan fungsi utama.
 
-| Baris Kode                                              | Kategori                    | Penjelasan Rinci                                                                                                                                                                                          |
-| :------------------------------------------------------ | :-------------------------- | :-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
-| `import java.util.Scanner;`                             | **Library**                 | Memasukkan (_import_) fitur **`Scanner`**. `Scanner` adalah alat (kelas) dari _library_ `java.util` yang memungkinkan program **membaca input dari keyboard** (seperti nama, PIN, atau jumlah uang).      |
-| `import java.util.ArrayList;`                           | **Library**                 | Memasukkan fitur **`ArrayList`**. `ArrayList` adalah wadah fleksibel yang dapat menyimpan banyak data (seperti daftar pengguna) dan ukurannya bisa **berubah/bertambah** saat program berjalan (dinamis). |
-| `import java.util.Arrays;`                              | **Library**                 | Memasukkan fitur **`Arrays`**. Kelas ini berisi alat bantu untuk bekerja dengan _array_, khususnya di sini digunakan untuk membuat `ArrayList` awal dengan data yang sudah ditentukan.                    |
-| `public class SimpleATM {`                              | **Struktur Kelas**          | Mendeklarasikan kelas utama bernama `SimpleATM`. Semua program Java harus memiliki satu kelas utama.                                                                                                      |
-| `public static Scanner input = new Scanner(System.in);` | **Variabel Global**         | Membuat objek `input` dari kelas **`Scanner`**. `System.in` memberi tahu `Scanner` untuk "mendengarkan" input dari konsol/keyboard. Variabel ini bisa digunakan di mana saja di kelas `SimpleATM`.        |
-| `public static void main(String[] args) {`              | **Fungsi Utama**            | Ini adalah **titik awal** program. Semua kode di dalamnya akan dijalankan pertama kali.                                                                                                                   |
-| `while (true) {`                                        | **Struktur Kontrol**        | Membuat _loop_ **tak terbatas**. Ini memastikan Menu Utama akan terus ditampilkan **berulang kali** setelah satu operasi selesai, sampai pengguna memilih `break` (Exit).                                 |
-| `System.out.println(...)`                               | **Fitur Code**              | Mencetak/menampilkan teks ke konsol, termasuk menu dan _decorative box_.                                                                                                                                  |
-| `int pilihan = input.nextInt();`                        | **Input Data**              | Membaca input dari pengguna (seperti `1`, `2`, atau `3`) dan menyimpannya di variabel `pilihan`. Metode `nextInt()` hanya membaca angka bulat.                                                            |
-| `input.nextLine();`                                     | **Fitur Code**              | Baris ini sangat penting! Ia **membersihkan sisa enter** di _buffer_ input. Jika tidak ada, input `nextLine()` (untuk membaca nama) berikutnya bisa rusak/terlewat.                                       |
-| `if (pilihan == 1) { ... }`                             | **Operator Logika/Kondisi** | Memeriksa apakah **`pilihan` sama dengan (`==`) `1` (Login)**. Jika ya, memanggil fungsi `atm.login()` lalu `atm.menu()`.                                                                                 |
-| `else if (pilihan == 2) { ... }`                        | **Operator Logika/Kondisi** | Memeriksa apakah **`pilihan` sama dengan (`==`) `2` (Sign In/Daftar)**. Jika ya, memanggil `atm.adduser()` dan mengulang menu awal (`continue`).                                                          |
-| `else if (pilihan == 3) { break; }`                     | **Struktur Kontrol**        | Jika **`pilihan` sama dengan (`==`) `3` (Exit)**, perintah `break` akan **menghentikan** _loop_ `while(true)` dan program berakhir.                                                                       |
-| `class atm { ... }`                                     | **Struktur Kelas**          | Ini adalah awal dari **Kelas Logika** (memuat semua data dan fungsi ATM) yang akan dijelaskan di bagian berikutnya.                                                                                       |
+## I. Struktur Program dan Penggunaan Library 📚
+
+Kode dibagi menjadi dua kelas: `SimpleATM` (Kelas Utama) dan `atm` (Kelas Logika).
+
+| Baris Kode                       | Kategori                    | Penjelasan Detail                                                                                                                         |
+| :------------------------------- | :-------------------------- | :---------------------------------------------------------------------------------------------------------------------------------------- |
+| `import java.util.Scanner;`      | **Library (I/O)**           | Mengimpor kelas **`Scanner`** untuk membaca input dari pengguna melalui konsol (keyboard).                                                |
+| `import java.util.ArrayList;`    | **Library (Struktur Data)** | Mengimpor kelas **`ArrayList`** untuk membuat daftar data yang ukurannya dapat berubah secara dinamis (misalnya, menambah pengguna baru). |
+| `import java.util.Arrays;`       | **Library (Utility)**       | Mengimpor utilitas **`Arrays`** untuk membantu membuat `ArrayList` awal dengan data _default_.                                            |
+| `public class SimpleATM { ... }` | **Kelas Utama**             | Kelas yang mengandung fungsi `main()`, titik awal eksekusi program.                                                                       |
+| `class atm { ... }`              | **Kelas Logika**            | Kelas yang menyimpan semua data pengguna dan mengimplementasikan semua fungsi transaksi (login, menu, setor, tarik, transfer).            |
 
 ---
 
-## 🧠 Penjelasan Baris per Baris: Kelas Logika (`atm`)
+## II. Struktur Data Global (Kelas `atm`) 💾
 
-Kelas ini menangani semua data (pengguna, PIN, saldo) dan semua operasi (login, transfer, setor, tarik).
+Semua data master ATM disimpan sebagai `private static ArrayList` di dalam kelas `atm`.
 
-### 1. Deklarasi Data Global
-
-| Baris Kode                                                                                             | Kategori            | Penjelasan Rinci                                                                                                                                                                                                                               |
-| :----------------------------------------------------------------------------------------------------- | :------------------ | :--------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
-| `private static ArrayList<String> user = new ArrayList<>(Arrays.asList("padli", "risca", "apif"));`    | **Struktur Data**   | Membuat wadah fleksibel (`ArrayList`) untuk menyimpan **Nama Pengguna** (tipe `String`). Kata kunci **`private`** berarti data ini hanya bisa diakses di dalam kelas `atm`.                                                                    |
-| `private static ArrayList<Integer> pin = new ArrayList<>(Arrays.asList(111, 222, 333));`               | **Struktur Data**   | Membuat `ArrayList` untuk menyimpan **PIN** (tipe `Integer`). Indeks PIN harus sesuai dengan indeks nama pengguna.                                                                                                                             |
-| `private static ArrayList<Long> saldo = new ArrayList<>(Arrays.asList(1000000L, 2000000L, 3000000L));` | **Struktur Data**   | Membuat `ArrayList` untuk menyimpan **Saldo** (tipe **`Long`**). `Long` digunakan untuk menyimpan angka yang sangat besar (seperti uang) dengan lebih aman dibandingkan `Integer` atau `double`. Huruf `L` menandakan nilai ini adalah `Long`. |
-| `private static int userid;`                                                                           | **Variabel Global** | Menyimpan **Indeks** (nomor urut) pengguna yang saat ini berhasil _login_ (`0`, `1`, `2`, dst.). Ini adalah kunci untuk mengakses data saldo dan PIN yang benar.                                                                               |
-| `public static Scanner input = new Scanner(System.in);`                                                | **Variabel Global** | Membuat objek `Scanner` untuk input, mirip seperti di kelas utama.                                                                                                                                                                             |
-
-### 2. Fungsi Otentikasi (`autentikasiuser` dan `autentikasipin`)
-
-| Baris Kode                                             | Kategori                  | Penjelasan Rinci                                                                                                                                                                                         |
-| :----------------------------------------------------- | :------------------------ | :------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
-| `public static int autentikasiuser(String username) {` | **Fungsi**                | Fungsi untuk mencari nama di daftar `user`. Ia menerima satu `username` sebagai masukan.                                                                                                                 |
-| `for (int i = 0; i < user.size(); i++) {`              | **Struktur Kontrol**      | Melakukan perulangan, mulai dari indeks `0` sampai akhir daftar `user` (`user.size()`).                                                                                                                  |
-| `if (username.equals(user.get(i))) {`                  | **Operator Logika/Fitur** | Membandingkan: apakah `username` yang dimasukkan **sama dengan** (`equals()`) nama di indeks ke-`i` dalam daftar `user`.                                                                                 |
-| `return i;`                                            | **Fungsi**                | Jika nama cocok, fungsi **mengembalikan nilai indeks (`i`)** ke pemanggil.                                                                                                                               |
-| `return -1;`                                           | **Fungsi**                | Jika perulangan selesai dan nama tidak ditemukan, fungsi **mengembalikan nilai `-1`** (Kode yang berarti "tidak ditemukan").                                                                             |
-| `public static boolean autentikasipin(int userpin) {`  | **Fungsi**                | Fungsi untuk memverifikasi PIN. Ia menerima satu `userpin` sebagai masukan.                                                                                                                              |
-| `return userpin == pin.get(userid);`                   | **Operator Logika**       | Membandingkan: apakah `userpin` yang dimasukkan **sama dengan** (`==`) PIN yang tersimpan di daftar `pin` pada posisi `userid` (indeks pengguna yang sedang _login_). Mengembalikan `true` atau `false`. |
-
-### 3. Fungsi Tambah Pengguna (`adduser`) - **Fungsi Baru**
-
-| Baris Kode                             | Kategori                    | Penjelasan Rinci                                                                           |
-| :------------------------------------- | :-------------------------- | :----------------------------------------------------------------------------------------- |
-| `int ceknama = autentikasiuser(nama);` | **Fungsi**                  | Memanggil fungsi pencarian untuk memastikan nama yang ingin didaftarkan **belum ada**.     |
-| `if (ceknama == -1) { ... }`           | **Operator Logika/Kondisi** | Jika nama **belum ada** (`-1`), lanjutkan ke proses pembuatan PIN.                         |
-| `if (sandi1 != sandi2) { ... }`        | **Operator Logika/Kondisi** | Membandingkan: apakah PIN 1 **tidak sama dengan** (`!=`) PIN 2. Jika ya, gagal dan ulangi. |
-| `user.add(nama);`                      | **Fitur `ArrayList`**       | Menambahkan `nama` baru ke akhir daftar `user`.                                            |
-| `pin.add(sandi1);`                     | **Fitur `ArrayList`**       | Menambahkan `sandi1` (PIN yang sudah dikonfirmasi) ke akhir daftar `pin`.                  |
-| `saldo.add(0L);`                       | **Fitur `ArrayList`**       | Menambahkan saldo awal **`0`** (tipe `Long`) ke akhir daftar `saldo`.                      |
-
-### 4. Fungsi Transaksi (`depo`, `withdraw`, `transfer`)
-
-| Baris Kode                                                  | Kategori                    | Penjelasan Rinci                                                                                                                                                                                                                        |
-| :---------------------------------------------------------- | :-------------------------- | :-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- | --- | -------------------------------------------------------------------------------------------------------------------------- |
-| `long depo = input.nextLong();`                             | **Input Data**              | Membaca input deposit sebagai angka tipe **`long`** (untuk uang).                                                                                                                                                                       |
-| `if (depo <= 0) { ... }`                                    | **Operator Logika/Kondisi** | Memvalidasi: jumlah deposit harus **lebih besar dari** (`>`) `0`.                                                                                                                                                                       |
-| `depo = saldo.get(userid) + depo;`                          | **Operator Aritmatika**     | Menghitung saldo baru: **`Saldo Lama` ditambah (`+`) `Jumlah Deposit`**.                                                                                                                                                                |
-| `saldo.set(userid, depo);`                                  | **Fitur `ArrayList`**       | **Mengubah/mengganti** nilai saldo lama di posisi `userid` dengan saldo baru (`depo`).                                                                                                                                                  |
-| `if (withdraw < 0 && withdraw > saldo.get(userid)) { ... }` | **Operator Logika/Kondisi** | Validasi Penarikan: Jika jumlah penarikan **kurang dari (`<`) `0`** **ATAU (`&&`)** jumlah penarikan **lebih besar dari (`>`) saldo yang tersedia**. Jika salah satu benar, tampilkan error. \*\*(Catatan: Operator logika seharusnya ` |     | `(ATAU) untuk mencakup kedua skenario kegagalan, tetapi kode menggunakan`&&` (DAN) yang bisa menyebabkan _bug_ logis).\*\* |
-| `long terima = saldo.get(penerima) + transfer;`             | **Operator Aritmatika**     | Menghitung saldo penerima: **`Saldo Penerima Lama` ditambah (`+`) `Jumlah Transfer`**.                                                                                                                                                  |
-| `long beri = saldo.get(userid) - transfer;`                 | **Operator Aritmatika**     | Menghitung saldo pengirim: **`Saldo Pengirim Lama` dikurang (`-`) `Jumlah Transfer`**.                                                                                                                                                  |
-| `saldo.set(penerima, terima);`                              | **Fitur `ArrayList`**       | Mengubah saldo **Penerima**.                                                                                                                                                                                                            |
-| `saldo.set(userid, beri);`                                  | **Fitur `ArrayList`**       | Mengubah saldo **Pengirim**.                                                                                                                                                                                                            |
+| Variabel | Tipe Data            | Keterangan Tambahan                                                                             | Penggunaan Kunci                                                              |
+| :------- | :------------------- | :---------------------------------------------------------------------------------------------- | :---------------------------------------------------------------------------- |
+| `user`   | `ArrayList<String>`  | Daftar nama pengguna. Dibuat dengan data awal (`"padli"`, `"risca"`, dll.).                     | Digunakan untuk otentikasi dan transfer.                                      |
+| `pin`    | `ArrayList<Integer>` | Daftar PIN pengguna. Indeksnya sesuai dengan `user`.                                            | Digunakan untuk verifikasi sandi dalam otentikasi.                            |
+| `saldo`  | `ArrayList<Long>`    | Saldo saat ini. Menggunakan **`Long`** untuk presisi dan jangkauan nilai uang yang lebih besar. | Diperbarui saat transaksi keuangan (`depo`, `withdraw`, `transfer`).          |
+| `userid` | `int`                | Menyimpan **indeks** (nomor urut) pengguna yang sedang **aktif login**.                         | Kunci untuk mengakses data saldo dan PIN yang benar dari `ArrayList` di atas. |
+| `input`  | `Scanner`            | Objek untuk membaca input di dalam kelas `atm`.                                                 | Digunakan di semua fungsi yang memerlukan interaksi pengguna.                 |
 
 ---
 
-## 🛠️ Ringkasan Penggunaan Fitur Kunci
+## III. Fungsi Utama dan Kontrol Aliran (Flow Control) 🚦
 
-| Kategori                   | Fitur Code / Library         | Contoh Penggunaan dalam Kode                                     | Fungsi dalam Program                                                                                             |
-| :------------------------- | :--------------------------- | :--------------------------------------------------------------- | :--------------------------------------------------------------------------------------------------------------- |
-| **Library**                | `java.util.Scanner`          | `new Scanner(System.in)`, `input.nextLine()`, `input.nextLong()` | Membaca semua input dari keyboard (nama, PIN, nominal).                                                          |
-| **Struktur Data**          | `java.util.ArrayList`        | `user.add(nama)`, `saldo.get(userid)`, `saldo.set(userid, depo)` | Menyimpan data pengguna, PIN, dan saldo secara dinamis (ukuran bisa bertambah saat `adduser`).                   |
-| **Operator Aritmatika**    | **`+` (Penjumlahan)**        | `saldo.get(userid) + depo`                                       | Menambah saldo saat Setor Tunai.                                                                                 |
-| **Operator Aritmatika**    | **`-` (Pengurangan)**        | `saldo.get(userid) - withdraw`                                   | Mengurangi saldo saat Tarik Tunai atau Transfer.                                                                 |
-| **Operator Logika/Relasi** | **`==` (Sama Dengan)**       | `pilihan == 1`, `userpin == pin.get(userid)`                     | Membandingkan dua nilai, seperti pilihan menu atau PIN.                                                          |
-| **Operator Logika/Relasi** | **`!=` (Tidak Sama Dengan)** | `sandi1 != sandi2`                                               | Membandingkan apakah dua nilai berbeda (misalnya, konfirmasi PIN).                                               |
-| **Operator Logika**        | **`&&` (AND)**               | `withdraw < 0 && withdraw > saldo.get(userid)`                   | Memeriksa apakah **kedua** kondisi benar (Digunakan dalam validasi di `withdraw` dan `transfer`).                |
-| **Struktur Kontrol**       | `while(true)`                | Digunakan di `main()`, `login()`, `menu()`, `adduser()`          | Membuat _loop_ agar menu/proses tertentu terus berjalan berulang kali sampai ada perintah `break` atau `return`. |
+### A. Aliran Program Utama (`SimpleATM.main`)
 
-Video di bawah ini menjelaskan konsep dasar operator aritmatika, yang sangat sering digunakan dalam fungsi-fungsi transaksi Anda seperti penjumlahan saldo (`+`) dan pengurangan saldo (`-`).
+| Baris Kunci                                           | Operator/Fitur         | Tujuan                                                                                                    |
+| :---------------------------------------------------- | :--------------------- | :-------------------------------------------------------------------------------------------------------- |
+| `while (true) { ... }`                                | **Looping**            | Membuat Menu Awal (Login/Sign In/Exit) berjalan secara **berulang tanpa batas** hingga `break` dipanggil. |
+| `if (pilihan == 1) { atm.login(); atm.menu(); }`      | **Kondisional (`==`)** | Jika `1` (Login) dipilih, panggil fungsi `login()` untuk otentikasi, lalu masuk ke `menu()` transaksi.    |
+| `else if (pilihan == 2) { atm.adduser(); continue; }` | **Kondisional**        | Jika `2` (Sign In) dipilih, panggil `adduser()`, lalu **kembali (`continue`)** ke Menu Awal.              |
+| `else if (pilihan == 3) { break; }`                   | **Kontrol Aliran**     | Jika `3` (Exit) dipilih, perintah **`break`** menghentikan `while (true)` dan program berakhir.           |
 
-[JAVA: Operator Aritmatik dengan Contoh - OnnoWiki - Onno Center](http://onnocenter.or.id/wiki/index.php/JAVA:_Operator_Aritmatik_dengan_Contoh)
+### B. Fungsi Otentikasi dan Registrasi
+
+| Fungsi/Metode                          | Penggunaan Operator/Fitur Kunci         | Deskripsi                                                                                                                                                                              |
+| :------------------------------------- | :-------------------------------------- | :------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| **`autentikasiuser(String username)`** | `for` loop, `equals()`                  | Mencari `username` di `user` list. Mengembalikan **indeks** jika ditemukan, atau **`-1`** jika tidak ada.                                                                              |
+| **`autentikasipin(int userpin)`**      | `==` (Sama Dengan), `get()`             | Membandingkan PIN yang dimasukkan dengan `pin.get(userid)`. Mengembalikan `true` atau `false`.                                                                                         |
+| **`login()`**                          | `while(true)`, `==`, `!=`               | Mengatur alur login. Meminta Nama, lalu PIN. Jika otentikasi gagal, _loop_ akan berlanjut (`continue`).                                                                                |
+| **`adduser()`**                        | `!=` (Tidak Sama Dengan), `add()`, `0L` | **Registrasi Akun Baru.** Memeriksa apakah nama sudah ada. Memvalidasi PIN. Jika sukses, menambahkan data ke **tiga** `ArrayList` (`user`, `pin`, `saldo`) dengan saldo awal **`0L`**. |
+
+---
+
+## IV. Fungsi Transaksi (Kelas `atm`) 💰
+
+Fungsi-fungsi ini dipanggil dari `atm.menu()` setelah pengguna berhasil _login_.
+
+| Fungsi/Metode                  | Operator/Fitur Utama                   | Logika Bisnis                                                                                                                                                                                  |
+| :----------------------------- | :------------------------------------- | :--------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- | -------- | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| **`ceksaldo()`**               | `get()`                                | Hanya menampilkan nilai `saldo.get(userid)` (saldo pengguna yang sedang _login_).                                                                                                              |
+| **`depo()` (Setor Tunai)**     | `+` (Penambahan), `set()`, `<= 0`      | 1. Meminta nominal. 2. Memvalidasi nominal harus **`> 0`**. 3. Menghitung saldo baru: `saldo[userid] **+** setor`. 4. Memperbarui `ArrayList` dengan `saldo.set()`.                            |
+| **`withdraw()` (Tarik Tunai)** | `-` (Pengurangan), `set()`, `&&` (DAN) | 1. Meminta nominal. 2. Memvalidasi nominal harus **`> 0`** **DAN** tidak boleh **`>`** dari saldo saat ini. 3. Menghitung saldo baru: `saldo[userid] **-** tarik`. 4. Memperbarui `ArrayList`. |
+| **`transfer()` (Kirim Tunai)** | `+`, `-`, `==`, `                      |                                                                                                                                                                                                | ` (ATAU) | 1. Meminta nama penerima, cek keberadaan. 2. Memvalidasi penerima **`!= userid`** (tidak boleh diri sendiri). 3. Memvalidasi jumlah transfer **`> 0`** **ATAU** **`<`** saldo pengirim. 4. Mengurangi saldo pengirim (`-`) dan Menambah saldo penerima (`+`). |
+| **`menu()`**                   | `else if`, `break`                     | Menampilkan opsi transaksi (1-5) setelah login. Jika pilih **`6` (EXIT)**, _loop_ dihentikan (`break`) dan kembali ke Menu Awal.                                                               |
