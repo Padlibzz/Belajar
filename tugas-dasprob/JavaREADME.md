@@ -261,5 +261,3 @@ public static void main(String[] args) {
 ```
 
 <br>
-
-Dokumentasi ini sekarang menyediakan konteks visual dan penjelasan langkah demi langkah untuk setiap blok kode, yang sangat membantu bagi siapa pun yang ingin memahami logika program ATM sederhana Anda. Selamat belajar\! 🎉
