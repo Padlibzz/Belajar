@@ -1,9 +1,3 @@
-kTentu\! Saya akan menyempurnakan dokumentasi sebelumnya dengan menambahkan *snippet* kode yang relevan di setiap bagiannya. Dengan cara ini, pembaca dapat melihat langsung baris kode mana yang sedang dijelaskan. 💡
-
-Saya akan menggunakan bahasa Indonesia dan format yang mudah dicerna.
-
------
-
 # 📖 Dokumentasi Kode: ATM Sederhana (Java)
 
 Proyek ini adalah simulasi dasar sistem ATM (Anjungan Tunai Mandiri) yang ditulis dalam bahasa pemrograman Java. Dokumentasi ini bertujuan untuk menjelaskan setiap bagian kode, sehingga mudah dipahami bahkan oleh pemula.
