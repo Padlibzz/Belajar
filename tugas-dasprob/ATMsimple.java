@@ -3,7 +3,6 @@ import java.util.ArrayList;
 import java.util.Arrays;
 
 public class ATMsimple {
-    
     public static Scanner input = new Scanner(System.in);
 
     public static void main(String[] args) {
@@ -177,7 +176,7 @@ class atm {
         while (true) {
             System.out.print("masukan nominal withdraw : ");
             long withdraw = input.nextLong();
-            if (withdraw < 0 && withdraw > saldo.get(userid)) {
+            if (withdraw < 0 || withdraw > saldo.get(userid)) {
                 System.out.println("masukan nomor yang valid");
                 continue;
             } else {
@@ -191,7 +190,7 @@ class atm {
 
     public static void transfer() {
         while (true) {
-            System.out.println("masukan nama penerima");
+            System.out.print("masukan nama penerima : ");
             String cekpenerima = input.nextLine();
             int penerima = autentikasiuser(cekpenerima);
             if (penerima == -1) {
@@ -212,6 +211,7 @@ class atm {
                     saldo.set(penerima, terima);
                     long beri = saldo.get(userid) - transfer;
                     saldo.set(userid, beri);
+                    System.out.println("sukses");
                     break;
                 }
             }    
