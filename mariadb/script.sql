@@ -1,0 +1,31 @@
+CREATE TABLE Suplayer (
+  ID_Suplayer INT AUTO_INCREMENT PRIMARY KEY,
+  Nama VARCHAR(100),
+  Alamat VARCHAR(255),
+  No_HP VARCHAR(12)
+);
+
+CREATE TABLE Barang (
+  ID_Barang INT AUTO_INCREMENT PRIMARY KEY,
+  ID_Suplayer INT,
+  Nama VARCHAR(100),
+  Jenis VARCHAR(100),
+  Harga DECIMAL(10,2),
+
+  FOREIGN KEY(ID_Suplayer) REFERENCES Suplayer(ID_Suplayer)
+);
+
+CREATE TABLE Transaksi (
+  ID_Transaksi INT AUTO_INCREMENT PRIMARY KEY,
+  ID_Barang INT,
+  Jumlah INT,
+  Total DECIMAL(10,2),
+  FOREIGN KEY(ID_Barang) REFERENCES Barang(ID_Barang)
+);
+
+CREATE TABLE Pembeli (
+  ID_Pembeli INT AUTO_INCREMENT PRIMARY KEY,
+  Nama VARCHAR(100),
+  Alamat VARCHAR(100),
+  No_HP VARCHAR(12)
+);
